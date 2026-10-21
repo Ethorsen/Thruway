@@ -1,6 +1,11 @@
 {
     "name": "thruway/router",
+    "version": "1.0.0",
     "description": "Thruway WAMP router core",
+    "repositories": [
+        { "url": "packages/raw-socket-transport", "type": "path", "options": { "symlink": true } },
+        { "url": "packages/ratchet-transport", "type": "path", "options": { "symlink": true } }
+    ],
     "license": "MIT",
     "keywords": [
         "WebSockets",
@@ -25,25 +30,16 @@
             "Thruway\\": "src/"
         }
     },
-    "autoload-dev": {
-        "psr-4": {
-            "Thruway\\Tests\\": "tests/"
-        }
-    },
-    "bin": [
-        "bin/thruway"
-    ],
     "require": {
-        "php": ">=5.6",
-        "voryx/thruway-common": "^1.0.5",
-        "thruway/client": "^0.5.0",
-        "react/event-loop": "^1.0 || ^0.5 || ^0.4.3",
-        "react/promise": "^2.3.0",
-        "thruway/ratchet-transport": "^0.5.0"
+        "voryx/thruway-common": "^1.0.6",
+        "thruway/client": "^0.5.8",
+        "react/event-loop": "^1.6.0",
+        "react/promise": "^2.11.0",
+        "thruway/ratchet-transport": "^1.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^8",
-        "thruway/pawl-transport": "^0.5.0",
-        "thruway/raw-socket-transport": "^0.5.0"
+        "phpunit/phpunit": "^13.4.3",
+        "thruway/pawl-transport": "^0.5.2",
+        "thruway/raw-socket-transport": "^1.0"
     }
 }

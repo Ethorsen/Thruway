@@ -140,8 +140,8 @@ class StateHandlerRegistry extends RouterModuleClient
         /** @var SubscriptionGroup $subscriptionGroup */
         foreach ($subscriptionGroups as $subscriptionGroup) {
             // only check groups without an existing state handler
-            if (!$this->stateHandlerMap->contains($subscriptionGroup)
-                || ($this->stateHandlerMap->contains($subscriptionGroup) && $this->stateHandlerMap[$subscriptionGroup] === null)
+            if (!$this->stateHandlerMap->offsetExists($subscriptionGroup)
+                || ($this->stateHandlerMap->offsetExists($subscriptionGroup) && $this->stateHandlerMap[$subscriptionGroup] === null)
             ) {
                 if ($stateHandlerRegistration->handlesStateFor($subscriptionGroup)) {
                     $this->stateHandlerMap[$subscriptionGroup] = $stateHandlerRegistration;
@@ -182,11 +182,11 @@ class StateHandlerRegistry extends RouterModuleClient
         /** @var StateHandlerRegistration $stateHandlerRegistration */
         foreach ($this->stateHandlerRegistrations as $stateHandlerRegistration) {
             if ($stateHandlerRegistration->handlesStateFor($subscriptionGroup)) {
-                $this->stateHandlerMap->attach($subscriptionGroup, $stateHandlerRegistration);
+                $this->stateHandlerMap->offsetSet($subscriptionGroup, $stateHandlerRegistration);
                 return;
             }
         }
-        $this->stateHandlerMap->attach($subscriptionGroup, null);
+        $this->stateHandlerMap->offsetSet($subscriptionGroup, null);
     }
 
     /**
@@ -197,7 +197,7 @@ class StateHandlerRegistry extends RouterModuleClient
     {
         $subscriptionGroup = $subscription->getSubscriptionGroup();
         if ($subscriptionGroup instanceof SubscriptionGroup) {
-            if (!$this->stateHandlerMap->contains($subscriptionGroup)) {
+            if (!$this->stateHandlerMap->offsetExists($subscriptionGroup)) {
                 $this->setupStateHandlerRegistration($subscriptionGroup);
             }
 
