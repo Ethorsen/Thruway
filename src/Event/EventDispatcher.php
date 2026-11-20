@@ -43,7 +43,7 @@ class EventDispatcher implements EventDispatcherInterface
     /**
      * {@inheritdoc}
      */
-    public function dispatch($eventName, Event $event = null)
+    public function dispatch($eventName, ?Event $event = null)
     {
         if (null === $event) {
             $event = new Event();

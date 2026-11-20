@@ -51,7 +51,7 @@ class Router implements RouterInterface, EventSubscriberInterface
      *
      * @param \React\EventLoop\LoopInterface $loop
      */
-    public function __construct(LoopInterface $loop = null)
+    public function __construct(?LoopInterface $loop = null)
     {
         Utils::checkPrecision();
 
