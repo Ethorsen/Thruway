@@ -193,8 +193,8 @@ class Dealer implements RealmModuleInterface
             // registration succeeded
             // make sure we have the registration in the collection
             // of registrations for this session
-            if (!$this->registrationsBySession->contains($session)) {
-                $this->registrationsBySession->attach($session, []);
+            if (!$this->registrationsBySession->offsetExists($session)) {
+                $this->registrationsBySession->offsetSet($session, []);
             }
             $registrationsForThisSession = $this->registrationsBySession[$session];
 
@@ -223,7 +223,7 @@ class Dealer implements RealmModuleInterface
                 if ($procedure->processUnregister($session, $msg)) {
                     // Unregistration was successful - remove from this sessions
                     // list of registrations
-                    if ($this->registrationsBySession->contains($session) &&
+                    if ($this->registrationsBySession->offsetExists($session) &&
                         in_array($procedure, $this->registrationsBySession[$session], true)
                     ) {
                         $registrationsInSession = $this->registrationsBySession[$session];
@@ -307,7 +307,7 @@ class Dealer implements RealmModuleInterface
         }
 
         //Process queues on other registrations if we can take more requests
-        if ($session->getPendingCallCount() == 0 && $this->registrationsBySession->contains($session)) {
+        if ($session->getPendingCallCount() == 0 && $this->registrationsBySession->offsetExists($session)) {
             $this->processQueue($session);
         }
 
@@ -564,8 +564,8 @@ class Dealer implements RealmModuleInterface
         }
 
         // remove the list of registrations
-        if ($this->registrationsBySession->contains($session)) {
-            $this->registrationsBySession->detach($session);
+        if ($this->registrationsBySession->offsetExists($session)) {
+            $this->registrationsBySession->offsetUnset($session);
         }
     }
 
